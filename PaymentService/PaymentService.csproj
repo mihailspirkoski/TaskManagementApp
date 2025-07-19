@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Presentation\Controllers\" />
-    <Folder Include="Infrastructure\" />
     <Folder Include="Tests\" />
     <Folder Include="Core\Entities\" />
     <Folder Include="Core\Interfaces\" />
@@ -20,11 +25,14 @@
     <Folder Include="Application\DTOs\" />
     <Folder Include="Application\UseCases\" />
     <Folder Include="Application\UseCases\Interfaces\" />
-    <Folder Include="Infrastructure\Data\" />
     <Folder Include="Infrastructure\External\" />
     <Folder Include="Infrastructure\Migrations\" />
     <Folder Include="Application\" />
     <Folder Include="Core\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
