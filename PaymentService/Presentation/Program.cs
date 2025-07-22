@@ -18,6 +18,9 @@ namespace PaymentService.Presentation
             builder.Services.AddDbContext<PaymentDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+            // register repositories
+            builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

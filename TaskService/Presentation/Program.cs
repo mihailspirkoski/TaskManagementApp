@@ -18,6 +18,10 @@ namespace TaskService.Presentation
             builder.Services.AddDbContext<TaskDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // register repositories
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ITaskRepository, TaskRepository>(); 
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

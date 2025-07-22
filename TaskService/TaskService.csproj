@@ -24,7 +24,6 @@
     <Folder Include="Application\DTOs\" />
     <Folder Include="Application\UseCases\" />
     <Folder Include="Application\UseCases\Interfaces\" />
-    <Folder Include="Infrastructure\Migrations\" />
     <Folder Include="Core\Entities\" />
     <Folder Include="Application\" />
     <Folder Include="Core\" />
