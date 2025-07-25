@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TaskService.Application;
 using TaskService.Infrastructure.Data;
 
 namespace TaskService.Presentation
@@ -20,7 +21,11 @@ namespace TaskService.Presentation
 
             // register repositories
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<ITaskRepository, TaskRepository>(); 
+            builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+
+            //register application services
+            builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
+            builder.Services.AddScoped<ITaskApplicationService, TaskApplicationService>();
 
             var app = builder.Build();
 

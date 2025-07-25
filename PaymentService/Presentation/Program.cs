@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PaymentService.Application;
 using PaymentService.Infrastructure.Data;
 
 namespace PaymentService.Presentation
@@ -21,6 +22,10 @@ namespace PaymentService.Presentation
 
             // register repositories
             builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+
+            // register application services
+            builder.Services.AddScoped<ISubscriptionApplicationService, SubscriptionApplicationService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
