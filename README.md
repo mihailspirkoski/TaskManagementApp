@@ -10,7 +10,7 @@ A full-stack task management application with microservices, built to showcase m
 - **Testing**: xUnit
 
 ## Setup
-1. Clone the repo: `git clone https://github.com/your-username/TaskManagementApp.git`
+1. Clone the repo: `git clone https://github.com/mihailspirkoski/TaskManagementApp.git`
 2. Backend: `cd TaskService && dotnet restore`
 3. Frontend: `cd Frontend && npm install && ng serve`
 4. Database: Run `Database/TaskDb/SeedData.sql` in SQL Server
