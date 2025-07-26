@@ -2,6 +2,7 @@
 using PaymentService.Infrastructure.Data;
 using Shared.Core.Entities;
 using Shared.Core.Enums;
+using System.Security.Claims;
 
 namespace PaymentService.Application
 {
@@ -28,5 +29,14 @@ namespace PaymentService.Application
         public async Task<Subscription> GetByStripeIdAsync(string stripeSubscriptionId)
                 => await _subscriptionRepository.GetByStripeIdAsync(stripeSubscriptionId) 
                    ?? throw new KeyNotFoundException($"Subscription with Stripe ID {stripeSubscriptionId} not found.");
+
+        public int GetCurrentUserId(ClaimsPrincipal user)
+        {
+            var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out var userId))
+                throw new UnauthorizedAccessException("User is not authenticated");
+
+            return userId;
+        }
     }
 }
