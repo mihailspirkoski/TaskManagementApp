@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using TaskService.Application;
 using TaskService.Infrastructure.Data;
+using TaskService.Middleware;
 
 namespace TaskService.Presentation
 {
@@ -26,8 +29,28 @@ namespace TaskService.Presentation
             //register application services
             builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
             builder.Services.AddScoped<ITaskApplicationService, TaskApplicationService>();
+            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
+            // Add authentication and authorization services
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    };
+                });
 
             var app = builder.Build();
+
+            // register middleware
+            app.UseMiddleware<ExceptionMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -37,7 +60,7 @@ namespace TaskService.Presentation
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

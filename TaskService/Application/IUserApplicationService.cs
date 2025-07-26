@@ -1,4 +1,5 @@
-﻿using TaskService.Application.DTOs;
+﻿using System.Security.Claims;
+using TaskService.Application.DTOs;
 
 namespace TaskService.Application
 {
@@ -6,5 +7,6 @@ namespace TaskService.Application
     {
         Task<string> RegisterAsync(RegisterUserDto dto);
         Task<string> LoginAsync(LoginUserDto dto);
+        int GetCurrentUserId(ClaimsPrincipal user);
     }
 }

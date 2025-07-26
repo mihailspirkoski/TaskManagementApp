@@ -1,4 +1,5 @@
-﻿using TaskService.Application.DTOs;
+﻿using Shared.Core.Entities;
+using TaskService.Application.DTOs;
 using TaskService.Infrastructure.Data;
 
 namespace TaskService.Application
@@ -10,7 +11,7 @@ namespace TaskService.Application
 
         public TaskApplicationService(ITaskRepository taskRepository) => _taskRepository = taskRepository;
 
-        public async System.Threading.Tasks.Task AddAsync(CreateTaskDto dto, int userId)
+        public async System.Threading.Tasks.Task<Shared.Core.Entities.Task> AddAsync(CreateTaskDto dto, int userId)
         {
             if (string.IsNullOrWhiteSpace(dto.Title) || string.IsNullOrWhiteSpace(dto.Description))
                 throw new ArgumentException("Title and description are required");
@@ -23,6 +24,7 @@ namespace TaskService.Application
                 UserId = userId
             };
             await _taskRepository.AddAsync(task);
+            return task;
         }
 
         public async System.Threading.Tasks.Task DeleteAsync(int id, int userId)
