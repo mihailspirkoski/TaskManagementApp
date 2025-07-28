@@ -7,12 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService", "TaskService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService", "PaymentService\PaymentService.csproj", "{D10A10B1-29A8-440E-8477-1165AAB92D8E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TaskDb", "TaskDb", "{4736BE5E-1D26-4386-B625-E75EE43595F4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PaymentDb", "PaymentDb", "{07F03F94-2B4E-4425-A314-7F20696670FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{573C5237-A1D2-41D7-8F32-901CF9551DFF}"
 EndProject
 Global
@@ -36,10 +30,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{4736BE5E-1D26-4386-B625-E75EE43595F4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{07F03F94-2B4E-4425-A314-7F20696670FE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE27167E-5F35-459D-A0BA-E3DDEEBEDB6E}

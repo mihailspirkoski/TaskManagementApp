@@ -17,6 +17,7 @@ namespace TaskService.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            SeedData.Seed(modelBuilder);
             // Configure User entity
             modelBuilder.Entity<User>()
                  .HasIndex(u => u.Email)

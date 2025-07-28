@@ -14,6 +14,7 @@ namespace PaymentService.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            SeedData.Seed(modelBuilder);
             // Configure Subscription entity
             modelBuilder.Entity<Subscription>()
                 .Property(s => s.Status)
