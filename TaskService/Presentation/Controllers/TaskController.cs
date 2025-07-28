@@ -45,6 +45,7 @@ namespace TaskService.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto createTaskDto)
         {
+            
             var userId = _userApplicationService.GetCurrentUserId(User);
             var task = await _taskApplicationService.AddAsync(createTaskDto, userId);
             return CreatedAtAction(nameof(GetTaskById), new { task.Id }, task);

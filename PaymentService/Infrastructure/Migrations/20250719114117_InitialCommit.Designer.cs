@@ -9,7 +9,7 @@ using PaymentService.Infrastructure.Data;
 
 #nullable disable
 
-namespace PaymentService.Migrations
+namespace PaymentService.Infrastructure.Migrations
 {
     [DbContext(typeof(PaymentDbContext))]
     [Migration("20250719114117_InitialCommit")]
