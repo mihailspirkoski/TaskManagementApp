@@ -22,7 +22,7 @@ namespace TaskService.Application
         public async Task<string> LoginAsync(LoginUserDto dto)
         {
             var user = await _userRepository.GetByEmailAsync(dto.Email);
-            if (user == null || BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
                 throw new UnauthorizedAccessException("Invalid email or password");
             return GenerateJwtToken(user);
         }

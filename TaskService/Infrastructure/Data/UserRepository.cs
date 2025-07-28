@@ -34,7 +34,7 @@ namespace TaskService.Infrastructure.Data
 
 
         public async Task<User> GetByEmailAsync(string email) => await _context.Users
-            .FirstOrDefaultAsync(u => u.Email == email) ?? throw new KeyNotFoundException($"User with Email {email} not found.");
+            .FirstOrDefaultAsync(u => u.Email == email);
 
 
         public async Task<User> GetByIdAsync(int id) => await _context.Users.FindAsync(id) 

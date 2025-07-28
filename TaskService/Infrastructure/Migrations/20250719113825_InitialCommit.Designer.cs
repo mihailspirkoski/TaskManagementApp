@@ -9,7 +9,7 @@ using TaskService.Infrastructure.Data;
 
 #nullable disable
 
-namespace TaskService.Migrations
+namespace TaskService.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
     [Migration("20250719113825_InitialCommit")]
