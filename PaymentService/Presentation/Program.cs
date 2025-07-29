@@ -21,7 +21,15 @@ namespace PaymentService.Presentation
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<PaymentDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            // Add CORS policy
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular",
+                    builder => builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials());
+            });
 
             // register repositories
             builder.Services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
@@ -59,6 +67,8 @@ namespace PaymentService.Presentation
             }
 
             app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseCors("AllowAngular");
             app.UseAuthentication();
             app.UseAuthorization();
 
