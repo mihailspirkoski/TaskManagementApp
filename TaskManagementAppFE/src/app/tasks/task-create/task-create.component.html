@@ -1,1 +1,15 @@
-<p>task-create works!</p>
+<form (ngSubmit)="onSubmit()" class="task-form">
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input type="text" matInput [(ngModel)]="dto().title" name="title" required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input type="text" matInput [(ngModel)]="dto().description" name="description" required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Due Date</mat-label>
+        <input type="date" matInput [(ngModel)]="dto().dueDate" name ="dueDate" required>
+    </mat-form-field>
+    <button  mat-raised-button color="primary" type="submit">Create Task</button>
+</form>

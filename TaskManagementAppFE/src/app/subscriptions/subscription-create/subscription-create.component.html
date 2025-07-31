@@ -1,1 +1,7 @@
-<p>subscription-create works!</p>
+<form (ngSubmit)="onSubmit()" class="subscription-form">
+    <mat-form-field>
+        <mat-label>Stripe Subscripion ID</mat-label>
+        <input type="text" matInput [(ngModel)]="dto().stripeSubscriptionId" name="stripeSubscriptionId" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Create Stripe Subscription</button>
+</form>

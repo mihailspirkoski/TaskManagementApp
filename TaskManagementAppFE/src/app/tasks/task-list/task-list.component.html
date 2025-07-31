@@ -1,1 +1,6 @@
-<p>task-list works!</p>
+<mat-list>
+    <mat-list-item *ngFor="let task of tasks()">
+        <span>{{task.title}} - {{task.isCompleted ? 'Completed' : 'Pending'}}</span>
+    </mat-list-item>
+</mat-list>
+<button mat-raised-button color="primary" routerLink="/tasks/create">Create Task</button>

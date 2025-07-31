@@ -11,5 +11,6 @@ export const routes: Routes = [
     {path: 'tasks', component: TaskListComponent},
     {path: 'tasks/create', component: TaskCreateComponent},
     {path: 'subscriptions/create', component: SubscriptionCreateComponent},
-    {path: '', redirectTo: '/login', pathMatch: 'full'}
+    {path: '', redirectTo: '/login', pathMatch: 'full'},
+    { path: '**', redirectTo: '/login' }
 ];
