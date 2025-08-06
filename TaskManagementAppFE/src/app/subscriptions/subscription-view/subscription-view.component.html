@@ -1,0 +1,13 @@
+@if (subscription()) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Subscription Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>ID: {{ subscription()!.id }}</p>
+      <p>Stripe ID: {{ subscription()!.stripeSubscriptionId }}</p>
+      <p>Status: {{ subscription()!.status }}</p>
+      <p>Created: {{ subscription()!.createdAt }}</p>
+    </mat-card-content>
+  </mat-card>
+}

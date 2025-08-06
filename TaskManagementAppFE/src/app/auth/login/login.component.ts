@@ -29,7 +29,7 @@ export class LoginComponent {
           this.router.navigate(['/tasks']);
       } else {
           console.error('No token in response');
-      }
+        }
       },
       error: (err) => console.error('Login failed', err)
     });

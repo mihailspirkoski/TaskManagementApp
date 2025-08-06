@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:5179/api/auth';
+  private apiUrl = 'https://localhost:7298/api/auth';
   private token = signal<string | null>(null);
 
   constructor(private http: HttpClient) {

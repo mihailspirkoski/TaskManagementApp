@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { CreateTaskDto, Task } from '../models/task.model';
+import { CreateTaskDto, Task, UpdateTaskDto } from '../models/task.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class TaskService {
 
-  private apiUrl = 'http://localhost:5179/api/task';
+  private apiUrl = 'https://localhost:7298/api/task';
   private tasks = signal<Task[]>([]);
 
   constructor(private http: HttpClient) { }
@@ -25,10 +25,15 @@ export class TaskService {
   getTasks(): Observable<Task[]>{
     return this.http.get<Task[]>(`${this.apiUrl}/user`);
   }
-
+  
+  getTaskById(id: number): Observable<UpdateTaskDto>{
+    return this.http.get<UpdateTaskDto>(`${this.apiUrl}/${id}`);
+  }
   createTask(dto: CreateTaskDto): Observable<Task>{
     return this.http.post<Task>(this.apiUrl, dto);
   }
 
-
+  updateTask(task: UpdateTaskDto): Observable<void>{
+      return this.http.put<void>(this.apiUrl, task);
+  }
 }

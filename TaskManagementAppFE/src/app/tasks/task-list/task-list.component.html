@@ -1,6 +1,9 @@
 <mat-list>
-    <mat-list-item *ngFor="let task of tasks()">
-        <span>{{task.title}} - {{task.isCompleted ? 'Completed' : 'Pending'}}</span>
+    @for (task of tasks(); track task.id) {
+     <mat-list-item>
+        <span>{{ task.title }} - {{ task.isCompleted ? 'Completed' : 'Pending' }}</span>
+        <button mat-raised-button color="primary" [routerLink]="['/tasks/edit', task.id]">Edit</button>
     </mat-list-item>
+    }
 </mat-list>
 <button mat-raised-button color="primary" routerLink="/tasks/create">Create Task</button>

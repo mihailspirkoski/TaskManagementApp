@@ -1,0 +1,21 @@
+@if (task()) {
+  <form (ngSubmit)="onSubmit()" class="task-form">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="task().title" name="title" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="task().description" name="description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Due Date</mat-label>
+      <input matInput [(ngModel)]="task().dueDate" name="dueDate" type="date">
+    </mat-form-field>
+    <div>
+      <mat-checkbox [(ngModel)]="task().isCompleted" name="isCompleted" >Completed</mat-checkbox>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Update Task</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancel</button>
+  </form>
+}

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class SubscriptionService {
 
-  private apiUrl = 'http://localhost:5179/api/subscription';
+  private apiUrl = 'https://localhost:7277/api/subscription';
   private subscription = signal<Subscription | null>(null);
 
   constructor(private http: HttpClient) { }

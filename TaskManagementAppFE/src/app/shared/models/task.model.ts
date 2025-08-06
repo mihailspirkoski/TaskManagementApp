@@ -11,3 +11,11 @@ export interface CreateTaskDto{
     description?: string;
     dueDate?: string;
 }
+
+export interface UpdateTaskDto{
+    id: number;
+    title: string;
+    description?: string;
+    dueDate?: string;
+    isCompleted?: boolean;
+}

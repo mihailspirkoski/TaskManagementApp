@@ -51,9 +51,14 @@ namespace TaskService.Presentation.Controllers
             return CreatedAtAction(nameof(GetTaskById), new { task.Id }, task);
         }
 
-        [HttpPut]
+        [HttpPut] // ("{id}")
         public async Task<IActionResult> UpdateTask([FromBody] UpdateTaskDto updateTaskDto)
         {
+            //if (id != updateTaskDto.Id)
+            //{
+            //    return BadRequest("Task ID mismatch.");
+            //}
+
             var userId = _userApplicationService.GetCurrentUserId(User);
             await _taskApplicationService.UpdateAsync(updateTaskDto, userId);
             return NoContent();
