@@ -56,6 +56,15 @@ namespace TaskService.Application
             return userId;
         }
 
+        public async System.Threading.Tasks.Task ChangeRoleAsync(int userId, UserRole newRole)
+        {
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null)
+                throw new KeyNotFoundException("User not found");
+            user.Role = newRole;
+            await _userRepository.UpdateAsync(user);
+        }
+
         private string GenerateJwtToken(User user)
         {
             var claims = new[]

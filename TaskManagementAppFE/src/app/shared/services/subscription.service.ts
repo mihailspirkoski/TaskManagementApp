@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { CreateSubscriptionDto, Subscription } from '../models/subscription.model';
+import { CreateSubscriptionDto, Subscription, SubscriptionDto } from '../models/subscription.model';
 import { Observable } from 'rxjs';
 
 
@@ -23,8 +23,8 @@ export class SubscriptionService {
     this.subscription.set(subscription);
   }
 
-  createSubscription(dto: CreateSubscriptionDto): Observable<Subscription>{
-    return this.http.post<Subscription>(this.apiUrl, dto);
+  createSubscription(dto: CreateSubscriptionDto): Observable<SubscriptionDto>{
+    return this.http.post<SubscriptionDto>(`${this.apiUrl}/create`, dto);
   }
 
   getSubscription(stripeSubscriptionId: string): Observable<Subscription>{

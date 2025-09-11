@@ -7,5 +7,15 @@ export interface Subscription{
 }
 
 export interface CreateSubscriptionDto{
-    stripeSubscriptionId: string;
+    priceId: string;
+    paymentMethodId: string;
+}
+
+export interface SubscriptionDto {
+  id: number;
+  userId: number;
+  stripeSubscriptionId: string;
+  status: string; //'Active' | 'Inactive' | 'Cancelled' | 'PastDue' | 'Unpaid' | 'Trialing' | 'Paused';
+  createdAt: string;
+  updatedAt: string;
 }

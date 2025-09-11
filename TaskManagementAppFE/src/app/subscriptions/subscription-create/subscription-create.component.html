@@ -1,10 +1,14 @@
 <form (ngSubmit)="onSubmit()" class="subscription-form">
-    <mat-form-field>
-        <mat-label>Stripe Subscription ID</mat-label>
-        <input type="text" matInput [(ngModel)]="dto().stripeSubscriptionId" name="stripeSubscriptionId" required>
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Create Stripe Subscription</button>
+  <mat-form-field appearance="outline">
+    <mat-label>Price ID</mat-label>
+    <input matInput [ngModel]="priceId()" (ngModelChange)="priceId.set($event)" name="priceId" required placeholder="e.g., price_123">
+    @if (!priceId()) {
+      <mat-error>Price ID is required</mat-error>
+    }
+  </mat-form-field>
+  <div id="card-element" class="stripe-card"></div>
+  @if (error()) {
+    <mat-error class="error-message">{{ error() }}</mat-error>
+  }
+  <button mat-raised-button color="primary" type="submit" [disabled]="!priceId()">Create Subscription</button>
 </form>
-@if (subscription()) {
-  <a [routerLink]="['/subscriptions', subscription()!.stripeSubscriptionId]">View Subscription</a>
-}

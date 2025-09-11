@@ -36,6 +36,8 @@ namespace PaymentService.Presentation
 
             // register application services
             builder.Services.AddScoped<ISubscriptionApplicationService, SubscriptionApplicationService>();
+            builder.Services.AddHttpClient<TaskServiceClient>();
+            builder.Services.AddScoped<StripeService>();
 
             // Add authentication and authorization services
             // Add authentication and authorization services

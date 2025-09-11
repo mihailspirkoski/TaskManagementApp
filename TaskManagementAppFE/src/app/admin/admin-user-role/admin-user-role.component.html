@@ -1,0 +1,22 @@
+
+<form (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>User ID</mat-label>
+    <input matInput [ngModel]="userId()" (ngModelChange)="userId.set($event)" name="userId" readonly>
+  </mat-form-field>
+  <mat-form-field>  
+    <mat-label>Role</mat-label>
+    <mat-select [ngModel]="role()" (ngModelChange)="role.set($event)" name="role" required>
+      @for (role of roles; track role) {
+        <mat-option [value]="role">{{ role }}</mat-option>
+      }
+    </mat-select>
+    @if (role() === '') {
+      <mat-error>Role is required</mat-error>
+    }
+  </mat-form-field>
+  @if (error()) {
+    <mat-error>{{ error() }}</mat-error>
+  }
+  <button mat-raised-button color="primary" type="submit" [disabled]="!role()">Change Role</button>
+</form>

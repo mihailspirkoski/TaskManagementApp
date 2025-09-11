@@ -17,7 +17,7 @@ namespace PaymentService.Application
         {
             var subscription = new Subscription
             {
-                StripeSubscriptionId = dto.StripeSubscriptionId,
+                StripeSubscriptionId = dto.PaymentMethodId + dto.PriceId + userId.ToString(),
                 UserId = userId,
                 Status = SubscriptionStatus.Active,
                 CreatedAt = DateTime.UtcNow

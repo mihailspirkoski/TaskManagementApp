@@ -1,5 +1,9 @@
 ﻿namespace PaymentService.Application.DTOs
 {
-    public record CreateSubscriptionDto(string StripeSubscriptionId);
+    public class CreateSubscriptionDto
+    {
+        public string PaymentMethodId { get; set; }
+        public string PriceId { get; set; }
+    }
 
 }

@@ -1,17 +1,10 @@
-.subscription-form {
+.role-form {
   display: flex;
   flex-direction: column;
   gap: 16px;
   max-width: 400px;
   margin: 0 auto;
   padding: 16px;
-}
-
-.stripe-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 4px;
-  background: #fff;
 }
 
 .error-message {
