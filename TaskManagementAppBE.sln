@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService", "PaymentSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{573C5237-A1D2-41D7-8F32-901CF9551DFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService.Tests", "TaskService.Tests\TaskService.Tests.csproj", "{3629BDB8-DCA0-47EB-BDCE-F4C8F879795B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService.Tests", "PaymentService.Tests\PaymentService.Tests.csproj", "{7E1798C2-9AE7-4C9A-8E80-B8D74A259AF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{573C5237-A1D2-41D7-8F32-901CF9551DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{573C5237-A1D2-41D7-8F32-901CF9551DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{573C5237-A1D2-41D7-8F32-901CF9551DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3629BDB8-DCA0-47EB-BDCE-F4C8F879795B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3629BDB8-DCA0-47EB-BDCE-F4C8F879795B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3629BDB8-DCA0-47EB-BDCE-F4C8F879795B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3629BDB8-DCA0-47EB-BDCE-F4C8F879795B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E1798C2-9AE7-4C9A-8E80-B8D74A259AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E1798C2-9AE7-4C9A-8E80-B8D74A259AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E1798C2-9AE7-4C9A-8E80-B8D74A259AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E1798C2-9AE7-4C9A-8E80-B8D74A259AF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
