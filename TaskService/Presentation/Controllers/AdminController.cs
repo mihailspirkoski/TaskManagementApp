@@ -21,8 +21,26 @@ namespace TaskService.Presentation.Controllers
         [HttpPut("users/{userId}/{role}")]
         public async Task<IActionResult> ChangeUserRole(int userId, UserRole role)
         {
-            await _userApplicationService.ChangeRoleAsync(userId, role);
-            return NoContent();
+            if(userId <= 0 )
+                return BadRequest(new ProblemDetails { Status = 400, Detail = "Invalid user ID" });
+
+            try
+            {
+                await _userApplicationService.ChangeRoleAsync(userId, role);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new ProblemDetails { Status = 404, Detail = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new ProblemDetails { Status = 400, Detail = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails { Status = 500, Detail = $"Unexpected error occured {ex.Message}" });
+            }
         }
     }
 }

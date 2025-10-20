@@ -58,6 +58,9 @@ namespace TaskService.Application
 
         public async System.Threading.Tasks.Task ChangeRoleAsync(int userId, UserRole newRole)
         {
+            if(!Enum.IsDefined(typeof(UserRole), newRole))
+                throw new ArgumentException("Invalid user role specified");
+
             var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
                 throw new KeyNotFoundException("User not found");

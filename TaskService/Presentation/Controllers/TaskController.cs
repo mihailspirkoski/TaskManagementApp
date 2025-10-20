@@ -23,53 +23,149 @@ namespace TaskService.Presentation.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTaskById(int id)
         {
-            var task = await _taskApplicationService.GetByIdAsync(id);
-            return Ok(task);
+            if (id <= 0)
+                return BadRequest(new ProblemDetails { Status = 400, Detail = "Invalid Task ID" });
+
+            try
+            {
+                var task = await _taskApplicationService.GetByIdAsync(id);
+                return Ok(task);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new ProblemDetails { Status = 404, Detail = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails { Status = 500, Detail = $"Unexpected error occured {ex.Message}" });
+            }
         }
 
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAllTasks()
         {
-            var tasks = await _taskApplicationService.GetAllAsync();
-            return Ok(tasks);
+            try
+            {
+                var tasks = await _taskApplicationService.GetAllAsync();
+                return Ok(tasks);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails { Status = 500, Detail = $"Unexpected error occured {ex.Message}" });
+            }
         }
 
         [HttpGet("user")]
         public async Task<IActionResult> GetTasksByUser()
         {
-            var userId = _userApplicationService.GetCurrentUserId(User);
-            var tasks = await _taskApplicationService.GetByUserIdAsync(userId);
-            return Ok(tasks);
+            try
+            {
+                var userId = _userApplicationService.GetCurrentUserId(User);
+                var tasks = await _taskApplicationService.GetByUserIdAsync(userId);
+                return Ok(tasks);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new ProblemDetails { Status = 401, Detail = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails { Status = 500, Detail = $"Unexpected error occured {ex.Message}" });
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateTask([FromBody] CreateTaskDto createTaskDto)
         {
-            
-            var userId = _userApplicationService.GetCurrentUserId(User);
-            var task = await _taskApplicationService.AddAsync(createTaskDto, userId);
-            return CreatedAtAction(nameof(GetTaskById), new { task.Id }, task);
+            if (createTaskDto == null)
+                return BadRequest(new ProblemDetails { Status = 400, Detail = "Request body cannot be null" });
+            if (!ModelState.IsValid)
+                return BadRequest(new ProblemDetails
+                {
+                    Status = 400,
+                    Detail = string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))
+                });
+
+            try
+            {
+                var userId = _userApplicationService.GetCurrentUserId(User);
+                var task = await _taskApplicationService.AddAsync(createTaskDto, userId);
+                return CreatedAtAction(nameof(GetTaskById), new { task.Id }, task);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new ProblemDetails { Status = 400, Detail = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new ProblemDetails { Status = 401, Detail = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails { Status = 500, Detail = $"Unexpected error occured {ex.Message}" });
+            }
         }
 
-        [HttpPut] // ("{id}")
+        [HttpPut]
         public async Task<IActionResult> UpdateTask([FromBody] UpdateTaskDto updateTaskDto)
         {
-            //if (id != updateTaskDto.Id)
-            //{
-            //    return BadRequest("Task ID mismatch.");
-            //}
+            if (updateTaskDto == null)
+                return BadRequest(new ProblemDetails { Status = 400, Detail = "Request body cannot be null" });
+            if (!ModelState.IsValid)
+                return BadRequest(new ProblemDetails
+                {
+                    Status = 400,
+                    Detail = string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))
+                });
 
-            var userId = _userApplicationService.GetCurrentUserId(User);
-            await _taskApplicationService.UpdateAsync(updateTaskDto, userId);
-            return NoContent();
+            try
+            {
+                var userId = _userApplicationService.GetCurrentUserId(User);
+                await _taskApplicationService.UpdateAsync(updateTaskDto, userId);
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new ProblemDetails { Status = 400, Detail = ex.Message });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new ProblemDetails { Status = 404, Detail = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new ProblemDetails { Status = 401, Detail = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails { Status = 500, Detail = $"Unexpected error occured {ex.Message}" });
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            var userId = _userApplicationService.GetCurrentUserId(User);
-            await _taskApplicationService.DeleteAsync(id, userId);
-            return NoContent();
+            if (id <= 0)
+                return BadRequest(new ProblemDetails { Status = 400, Detail = "Invalid Task ID" });
+
+            try
+            {
+                var userId = _userApplicationService.GetCurrentUserId(User);
+                await _taskApplicationService.DeleteAsync(id, userId);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new ProblemDetails { Status = 404, Detail = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new ProblemDetails { Status = 401, Detail = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ProblemDetails { Status = 500, Detail = $"Unexpected error occured {ex.Message}" });
+            }
         }
 
     }
